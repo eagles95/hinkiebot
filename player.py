@@ -55,19 +55,12 @@ def getPlayerStats(fName,lName):
     data =  json.loads(response.read())["league"]["standard"]["stats"]["latest"]
     return player["firstName"] + " " + player["lastName"] + "(" + constants.id_to_team_name[int(player["teamId"])] + ") "+ data["ppg"] + " ppg / " + data["apg"] + " apg / " + data["rpg"] + " rpg / " + data["bpg"] + " bpg / " + data["spg"] + " spg; " + data["fgp"] + " FG% / " + data["tpp"] + " 3PT% / " + data["ftp"] + " FT%"
 
-def getBoxScore(teamID):
-    gm = game.getGame(teamID)
-    url = "http://data.nba.net/data/10s/prod/v1/" + gm["startDateEastern"] +"/" + gm["gameId"]+ "_boxscore.json"
-    response = urllib.urlopen(url)
-    data = json.loads(response.read())
-    return data
-
 def getPlayerLiveStats(fName,lName):
     try:
         player = getPlayerID(fName,lName)
     except:
-        return "Player Name not found"
-    boxscore = getBoxScore(int(player["teamId"]))
+        return "Player name not found"
+    boxscore = game.getBoxScore(int(player["teamId"]))
     activePlayers = boxscore["stats"]["activePlayers"]
     ret = ""
     for i in range(0,len(activePlayers)):
@@ -86,4 +79,12 @@ def getPlayerLiveStats(fName,lName):
             return ret + " in " + stats["min"] + " mins"
     return "player/game not found"
 
-print(getPlayerLiveStats("lonzo","ball"))
+def getProfile(fName,lName):
+    try:
+        player = getPlayerID(fName,lName)
+    except:
+        return "Player name not found"
+    photourl = "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/"+player["teamId"]+"/"+constants.SEASON_YEAR+"/260x190/"+player["personId"] + ".png"
+    profile = player["firstName"] + " " + player["lastName"] + "(" + constants.id_to_team_name[int(player["teamId"])] + ") #" + player["jersey"] + ", " + player["pos"] + ", " + player["heightFeet"] + "'" + player["heightInches"] + "'', "+ player["weightPounds"] + ", " + player["dateOfBirthUTC"]
+    return photourl + " " + profile
+print(getProfile("lonzo","ball"))

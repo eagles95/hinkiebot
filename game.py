@@ -44,6 +44,36 @@ def getGameScore(teamID):
         else:
             return ret + "OT"
 
+
+def getBoxScore(teamID):
+    gm = getGame(teamID)
+    url = "http://data.nba.net/data/10s/prod/v1/" + gm["startDateEastern"] +"/" + gm["gameId"]+ "_boxscore.json"
+    response = urllib.urlopen(url)
+    data = json.loads(response.read())
+    return data
+
+
+def getTeamStats(teamID):
+    boxscore = getBoxScore(teamID)
+    stats = boxscore["stats"]
+    hTeamId = boxscore["basicGameData"]["hTeam"]["teamId"]
+    vTeamId =  boxscore["basicGameData"]["vTeam"]["teamId"]
+    ret = constants.id_to_team_name[int(teamID)]
+    if(int(hTeamId) == teamID):
+        ret += " vs " + constants.id_to_team_name[int(vTeamId)] + ", "
+        stats = stats["hTeam"]["totals"]
+    else:
+        ret += " @ " + constants.id_to_team_name[int(hTeamId)] + ", "
+        stats = stats["vTeam"]["totals"]
+    ret += stats["fgm"] + "/" + stats["fga"] + "FGS; "
+    ret += stats["tpm"] + "/" + stats["tpa"] + " 3PT; "
+    ret += stats["ftm"] + "/" + stats["fta"] + " FT; "
+    ret += stats["assists"] + " AST; " + stats["defReb"] + " DEFREB; " + stats["offReb"] + " OFFREB; " + stats["totReb"] + " REB; " 
+    ret += stats["blocks"] + " BLK; "
+    ret += stats["steals"] + " STL; " + stats["turnovers"] + " TO"
+    return ret
+
+
 """
 Parse game date and time data and convert to EST timezone
 """
@@ -108,3 +138,5 @@ def getLast5(teamID):
                 ret = ret + " L, " + str(vTeamScore) + " - " + str(hTeamScore) + "/ "
 
     return ret
+
+print(getTeamStats(constants.DEN_TEAM_ID))
