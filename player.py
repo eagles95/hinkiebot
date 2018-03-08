@@ -2,7 +2,7 @@ import json
 import time
 import urllib
 import constants
-
+import game
 from datetime import datetime
 
 
@@ -53,4 +53,37 @@ def getPlayerStats(fName,lName):
     url = "http://data.nba.net/data/10s/prod/v1/" + str(constants.SEASON_YEAR) +  "/players/" + str(playerID) + "_profile.json"
     response = urllib.urlopen(url)
     data =  json.loads(response.read())["league"]["standard"]["stats"]["latest"]
-    return player["firstName"] + " " + player["lastName"] + "(" + constants.id_to_team_name[int(player["teamId"])] + ") "+ data["ppg"] + " ppg / " + data["apg"] + " apg / " + data["rpg"] + " rpg / " + data["bpg"] + " bpg / " + data["spg"] + " spg; " + data["fgp"] + " FG% / " + data["tpp"] + " 3PT% / " + data["ftp"] + " FT%" 
+    return player["firstName"] + " " + player["lastName"] + "(" + constants.id_to_team_name[int(player["teamId"])] + ") "+ data["ppg"] + " ppg / " + data["apg"] + " apg / " + data["rpg"] + " rpg / " + data["bpg"] + " bpg / " + data["spg"] + " spg; " + data["fgp"] + " FG% / " + data["tpp"] + " 3PT% / " + data["ftp"] + " FT%"
+
+def getBoxScore(teamID):
+    gm = game.getGame(teamID)
+    url = "http://data.nba.net/data/10s/prod/v1/" + gm["startDateEastern"] +"/" + gm["gameId"]+ "_boxscore.json"
+    response = urllib.urlopen(url)
+    data = json.loads(response.read())
+    return data
+
+def getPlayerLiveStats(fName,lName):
+    try:
+        player = getPlayerID(fName,lName)
+    except:
+        return "Player Name not found"
+    boxscore = getBoxScore(int(player["teamId"]))
+    activePlayers = boxscore["stats"]["activePlayers"]
+    ret = ""
+    for i in range(0,len(activePlayers)):
+        if(activePlayers[i]["personId"] == player["personId"]):
+            ret =  player["firstName"] + " " + player["lastName"] + "(" + constants.id_to_team_name[int(player["teamId"])] + ") "
+            if (boxscore["basicGameData"]["hTeam"]["teamId"] == player["teamId"]):
+                ret += "vs " + constants.id_to_team_name[int(boxscore["basicGameData"]["vTeam"]["teamId"])] + ", "
+            else:
+                ret += "@ " + constants.id_to_team_name[int(boxscore["basicGameData"]["hTeam"]["teamId"])] + ", "
+            stats= activePlayers[i]
+            ret += stats["points"] + "pts (" + stats["fgm"] + "/" + stats["fga"] + ")FGS ; "
+            ret += stats["tpm"] + "/" + stats["tpa"] + " 3PT" + "; "
+            ret += stats["ftm"] + "/" + stats["fta"] + " FT" + "; "
+            ret += stats["assists"] + " AST; " + stats["totReb"] + " REB; " + stats["blocks"] + " BLK; "
+            ret += stats["steals"] + " STL; " + stats["turnovers"] + " TO;" + stats["plusMinus"] + " +/-;"
+            return ret + " in " + stats["min"] + " mins"
+    return "player/game not found"
+
+print(getPlayerLiveStats("lonzo","ball"))
