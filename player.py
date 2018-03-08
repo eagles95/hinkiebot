@@ -54,7 +54,3 @@ def getPlayerStats(fName,lName):
     response = urllib.urlopen(url)
     data =  json.loads(response.read())["league"]["standard"]["stats"]["latest"]
     return player["firstName"] + " " + player["lastName"] + "(" + constants.id_to_team_name[int(player["teamId"])] + ") "+ data["ppg"] + " ppg / " + data["apg"] + " apg / " + data["rpg"] + " rpg / " + data["bpg"] + " bpg / " + data["spg"] + " spg; " + data["fgp"] + " FG% / " + data["tpp"] + " 3PT% / " + data["ftp"] + " FT%" 
-
-
-print(getPlayerLast3("ben","SIMMONS"))
-print(getPlayerStats("JoEl","EmbiiD"))
