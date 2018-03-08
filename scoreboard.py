@@ -39,6 +39,10 @@ def getScoreboard():
             if (gameStatus == constants.GAME_STATUS_FINAL):
                 ret = ret + "FINAL" + "; "
             else:
-                ret = ret + str(data[i]["period"]["current"]) + "Q; "
+                period = data[i]["period"]["current"]
+                if (period <= 4):
+                    ret = ret + str(period) + "Q; "
+                else:
+                    ret = ret + "OT; "
 
     return ret

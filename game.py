@@ -37,7 +37,12 @@ def getGameScore(teamID):
     elif (game["period"]["isHalftime"] == True):
         return ret + str(', HALF')
     else:
-        return ret + ", " + game["clock"] +" "+ str(game["period"]["current"]) + "Q"
+        ret =  ret + ", " + game["clock"] +" " 
+        period = game["period"]["current"]
+        if (period <= 4):
+            return ret + "Q" + period
+        else:
+            return ret + "OT"
 
 """
 Parse game date and time data and convert to EST timezone
