@@ -1,11 +1,14 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "d3104bd947606e36e7b4ca368e83d733acff749c192b571b3f62969af1b44f36"
+            "sha256": "d18f654ba94ca269ab4c4130382f8439ad3af22c7ecb133c5746e2cb0fcb2a34"
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_version": "2.7"
+            "python_version": "2.7",
+            "pytz": "2018.3",
+            "requests": "2.18.4",
+            "urllib3": "1.22"
         },
         "sources": [
             {
