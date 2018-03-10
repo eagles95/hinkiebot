@@ -1,0 +1,19 @@
+from flask import Flask,current_app
+app = Flask(__name__,static_url_path="/web")
+
+@app.route("/")
+def hello():
+        return "xd"
+@app.route('/commands')
+def commands():
+    print("pls")
+    return current_app.send_static_file('commands.html')
+
+@app.route('/quotes')
+def quote():
+    print("lul")    
+    return current_app.send_static_file('quotes.html')
+
+if __name__ == '__main__':
+    port = int(os.environ,get("PORT",5000))
+    app.run(debug=True,port=port)
