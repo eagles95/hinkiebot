@@ -215,7 +215,7 @@ def runCommand(command,args):
                 try:
                     firstName,lastName = args.split(" ",1)
                     return player_commands[command](firstName,lastName)
-                except Exception, e:
-                    return str(e)
+                except:
+                    return "Need player first and last name"
             else:
                 return None
