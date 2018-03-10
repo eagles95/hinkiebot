@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<h2>Commands</h2>
+
+<table>
+  <tr>
+    <th>Command</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>&score teamName</td>
+    <td>Returns the score and period of that teamName latest game</td>
+  </tr>
+  <tr>
+    <td>&nextgame teamName</td>
+    <td>Returns opponent,start time and date of the next game for that teamName</td>
+  </tr>
+  <tr>
+    <td>&last5 teamName</td>
+    <td>Returns scores of that teamName last 5 games</td>
+  </tr>
+  <tr>
+    <td>&record teamName</td>
+    <td>Returns record and placement in conference for that teamName</td>
+  </tr>
+  <tr>
+    <td>&teamstats teamName</td>
+    <td>Returns common stats for that teamName latest game</td>
+  </tr>
+  <tr>
+    <td>&standings conference/division name</td>
+    <td>Returns full standings for that conference/division </td>
+  </tr>
+  <tr>
+    <td>&scoreboard</td>
+    <td>Returns scores for today's games </td>
+  </tr>
+  <tr>
+    <td>&recent playerName </td>
+    <td>Returns stats for that playerName last 3 games</td>
+  </tr>
+  <tr>
+    <td>&stats playerName</td>
+    <td>Returns playerName season averages</td>
+  </tr>
+  <tr>
+    <td>&livestats playerName</td>
+    <td>Returns stats for that playerName latest game </td>
+  </tr>
+  <tr>
+    <td>&profile playerName</td>
+    <td>Returns picture,team,number,height,weight,age for that playerName</td>
+  </tr>
+  <tr>
+    <td>&amp;quote</td>
+    <td>Returns one of Sam Hinkie's idioms/quotes, full list here</td>
+  </tr>
+  <tr>
+    <td>&commands or &info</td>
+    <td>Returns this page</td>
+  </tr>
+</table>
+
+
+<h2>Arguments</h2>
+<h4>All arguments are case insensitive</h4>
+<table>
+  <tr>
+    <th>Argument Name</th>
+    <th>Options</th>
+  </tr>
+  <tr>
+    <td>teamName</td>
+    <td>Could be the city name(portland, toronto, philadelphia, etc),team name(mavericks, thunder, etc), both city and team name(houston rockets, utah jazz, etc), the abbreviation(PHI, LAL, BOS, etc) or a nickname (cavs, mavs, raps, sixers, etc)</td>
+  </tr>
+  <tr>
+    <td>conference/division name</td>
+    <td>west, east, southwest, pacific, northwest, southeast, atlantic, central</td>
+  </tr>
+  <tr>
+    <td>playerName</td>
+    <td>Has to be in the format: firstName lastName(lebron james, joel embiid, etc). OBS : I will try to get it working for players that are known by only one name or nickname (lebron, giannis, lonzo, etc)</td>
+  </tr>
+</table>
+
+</body>
+</html>

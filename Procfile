@@ -1,1 +1,1 @@
-worker python bot.py
+web: gunicorn -b :$PORT main:app
