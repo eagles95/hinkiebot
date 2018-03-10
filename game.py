@@ -138,5 +138,3 @@ def getLast5(teamID):
                 ret = ret + " L, " + str(vTeamScore) + " - " + str(hTeamScore) + "/ "
 
     return ret
-
-print(getTeamStats(constants.DEN_TEAM_ID))

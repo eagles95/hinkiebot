@@ -4,7 +4,7 @@ import urllib
 import constants
 import game
 from datetime import datetime
-
+from datetime import date
 
 class PlayerNotFoundException(Exception):
         pass
@@ -75,9 +75,15 @@ def getPlayerLiveStats(fName,lName):
             ret += stats["tpm"] + "/" + stats["tpa"] + " 3PT" + "; "
             ret += stats["ftm"] + "/" + stats["fta"] + " FT" + "; "
             ret += stats["assists"] + " AST; " + stats["totReb"] + " REB; " + stats["blocks"] + " BLK; "
-            ret += stats["steals"] + " STL; " + stats["turnovers"] + " TO;" + stats["plusMinus"] + " +/-;"
+            ret += stats["steals"] + " STL; " + stats["turnovers"] + " TO; " + stats["plusMinus"] + " +/-"
             return ret + " in " + stats["min"] + " mins"
     return "player/game not found"
+
+def calculate_age(birth):
+    born = datetime.strptime(birth, '%Y-%m-%d').date()
+    today = date.today()
+    return str(today.year - born.year - ((today.month, today.day) < (born.month, born.day)))
+
 
 def getProfile(fName,lName):
     try:
@@ -85,6 +91,5 @@ def getProfile(fName,lName):
     except:
         return "Player name not found"
     photourl = "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/"+player["teamId"]+"/"+constants.SEASON_YEAR+"/260x190/"+player["personId"] + ".png"
-    profile = player["firstName"] + " " + player["lastName"] + "(" + constants.id_to_team_name[int(player["teamId"])] + ") #" + player["jersey"] + ", " + player["pos"] + ", " + player["heightFeet"] + "'" + player["heightInches"] + "'', "+ player["weightPounds"] + ", " + player["dateOfBirthUTC"]
+    profile = player["firstName"] + " " + player["lastName"] + "(" + constants.id_to_team_name[int(player["teamId"])] + ") #" + player["jersey"] + ", " + player["pos"] + ", " + player["heightFeet"] + "'" + player["heightInches"] + "'', "+ player["weightPounds"] + ", age " + calculate_age(player["dateOfBirthUTC"])
     return photourl + " " + profile
-print(getProfile("lonzo","ball"))

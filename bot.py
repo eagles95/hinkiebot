@@ -14,9 +14,10 @@ class HinkieBot(ch.RoomManager):
         print("Disconnected from "+room.name)
 
     def onMessage(self, room, user, message):
-        msg = str(message.body)
+        msg = str(message.body).lstrip()
         print(msg)
         if (msg[0] == prefix):
+            msg = msg[1:]
             try:
                 command,args = msg.split(" ",1)
                 print("command" + command)
@@ -31,5 +32,5 @@ class HinkieBot(ch.RoomManager):
 
 rooms = ["hinkiebottesterxd"]
 bot_name = "HinkieBot"
-bot_pw = ""
+bot_pw = "fuckthecowboys"
 HinkieBot.easy_start(rooms,bot_name,bot_pw)

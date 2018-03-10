@@ -4,18 +4,21 @@ import standings
 import scoreboard
 from random import randint
 
-team_commands = {"&score" : game.getGameScore,
-                "&nextgame" : game.getNextGame,
-                "&last5" : game.getLast5,
-                "&record": standings.teamRecord,
+team_commands = {"score" : game.getGameScore,
+                "nextgame" : game.getNextGame,
+                "last5" : game.getLast5,
+                "record": standings.teamRecord,
+                "teamstats" : game.getTeamStats
 }
 
-standings_commands = {"&standings" : standings.getStandings}
+standings_commands = {"standings" : standings.getStandings}
 
-scoreboard_commands = {"&scoreboard" : scoreboard.getScoreboard}
+scoreboard_commands = {"scoreboard" : scoreboard.getScoreboard}
 
-player_commands = {"&recent" : player.getPlayerLast3,
-                   "&stats" : player.getPlayerStats
+player_commands = {"recent" : player.getPlayerLast3,
+                   "stats" : player.getPlayerStats,
+                   "livestats" : player.getPlayerLiveStats,
+                   "profile" : player.getProfile
 }
 
 conf_aliases = {
@@ -198,7 +201,7 @@ def runCommand(command,args):
         if(args == None):
             if(command in scoreboard_commands):
                 return scoreboard_commands[command]()
-            elif(command == "&quote"):
+            elif(command == "quote"):
                 return getHinkieQuote()
         else:
             args = args.lower()
@@ -212,7 +215,7 @@ def runCommand(command,args):
                 try:
                     firstName,lastName = args.split(" ",1)
                     return player_commands[command](firstName,lastName)
-                except:
-                    return "Need first and last name for player info"
+                except Exception, e:
+                    return str(e)
             else:
                 return None
