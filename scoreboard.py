@@ -1,7 +1,7 @@
 import json
 import time
 import pytz
-from datetime import datetime
+from datetime import datetime,timedelta
 import urllib
 import constants
 
@@ -10,7 +10,10 @@ import constants
 load todays scoreboard from url
 """
 def loadScoreboard():
-    date = datetime.now(constants.TIME_ZONE).strftime('%Y%m%d')
+    date = datetime.now(constants.TIME_ZONE)
+    if (date.hour < constants.SCOREBOARD_UPDATE_HOUR):
+        date =  date - timedelta(days=1)
+    date = date.strftime('%Y%m%d')
     url = "http://data.nba.net/data/10s/prod/v1/" + date + "/scoreboard.json"
     response = urllib.urlopen(url)
     return json.loads(response.read())
@@ -46,3 +49,6 @@ def getScoreboard():
                     ret = ret + "OT; "
 
     return ret
+
+
+print(getScoreboard())

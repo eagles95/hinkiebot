@@ -20,6 +20,7 @@ def getGame(teamID):
 
     #team not playing rn,need to get it from logs
     url = "http://data.nba.net/data/10s/prod/v1/" + constants.SEASON_YEAR + "/teams/" + constants.id_to_team_name[teamID].lower()  + "/schedule.json"
+    print("wow")
     response = urllib.urlopen(url)
     data = json.loads(response.read())
     lastGame = data["league"]["lastStandardGamePlayedIndex"]
@@ -31,19 +32,23 @@ Returns the Score of the current game for that teamID
 """
 def getGameScore(teamID):
     print("score method")
-    game = getGame(teamID)
-    ret = constants.id_to_team_name[int(game["vTeam"]["teamId"])] + " "  + game["vTeam"]["score"] + " @ " + constants.id_to_team_name[int(game["hTeam"]["teamId"])] + " "  + game["hTeam"]["score"]
-    if(game["statusNum"] == constants.GAME_STATUS_FINAL):
-        return ret + str(', FINAL')
-    elif (game["period"]["isHalftime"] == True):
-        return ret + str(', HALF')
-    else:
-        ret =  ret + ", " + game["clock"] + " "
-        period = game["period"]["current"]
-        if (period <= 4):
-            return ret + str(period)+ "Q"
+    try:
+        game = getGame(teamID)
+        print(str(game))
+        ret = constants.id_to_team_name[int(game["vTeam"]["teamId"])] + " "  + game["vTeam"]["score"] + " @ " + constants.id_to_team_name[int(game["hTeam"]["teamId"])] + " "  + game["hTeam"]["score"]
+        if(game["statusNum"] == constants.GAME_STATUS_FINAL):
+            return ret + str(', FINAL')
+        elif (game["period"]["isHalftime"] == True):
+            return ret + str(', HALF')
         else:
-            return ret + "OT"
+            ret =  ret + ", " + game["clock"] + " "
+            period = game["period"]["current"]
+            if (period <= 4):
+                return ret + str(period)+ "Q"
+            else:
+                return ret + "OT"
+    except Exception,e:
+        print(str(e))
 
 
 def getBoxScore(teamID):

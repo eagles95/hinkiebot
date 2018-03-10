@@ -1,42 +1,6 @@
 import datetime
 import pytz
 
-#TEAM IDS IN THE API
-ATL_TEAM_ID = 1610612737
-BOS_TEAM_ID = 1610612738
-BKN_TEAM_ID = 1610612751
-CHA_TEAM_ID =  1610612766
-CHI_TEAM_ID = 1610612741
-CLE_TEAM_ID = 1610612739
-DAL_TEAM_ID = 1610612742
-DEN_TEAM_ID = 1610612743
-DET_TEAM_ID = 1610612765
-GS_TEAM_ID =    1610612744
-HOU_TEAM_ID = 1610612745
-IND_TEAM_ID = 1610612754
-LAC_TEAM_ID =   1610612746
-LAL_TEAM_ID = 1610612747
-MEM_TEAM_ID = 1610612763
-MIA_TEAM_ID = 1610612748
-MIL_TEAM_ID = 1610612749
-MIN_TEAM_ID =   1610612750
-NO_TEAM_ID = 1610612740
-NY_TEAM_ID = 1610612752
-OKC_TEAM_ID = 1610612760
-ORL_TEAM_ID = 1610612753
-PHI_TEAM_ID = 1610612755
-PHO_TEAM_ID = 1610612756
-POR_TEAM_ID = 1610612757
-SAC_TEAM_ID = 1610612758
-SA_TEAM_ID = 1610612759
-TOR_TEAM_ID = 1610612761
-UTA_TEAM_ID = 1610612762
-WAS_TEAM_ID = 1610612764
-TEAM_IDS = [1610612737, 1610612738,1610612751,1610612766,1610612741,1610612739,1610612742,1610612743,1610612765,1610612744,1610612745,1610612754,1610612746,
-1610612747,1610612763,1610612748,1610612749,1610612750,1610612740,1610612752,1610612760,1610612753,1610612755,1610612756,1610612757,1610612758,
-1610612759,1610612761,1610612762,1610612764]
-
-
 #Mapping IDs to names
 id_to_team_name = { 
     1610612737 : 'Hawks',
@@ -108,11 +72,7 @@ id_to_team_conf =  {
     
 
 
-#2017-18 REGULAR SEASON DATES(UPDATE ONCE PLAYOFFS START)
-SEASON_START = datetime.date(2017,10,17)
-SEASON_END = datetime.date(2018,3,11)
-CURRENT_SEASON = "2017-18"
-SEASON_TYPE = 'Regular Season'
+#Season Year
 SEASON_YEAR = "2017"
 
 #GAME_STATUS_IDS
@@ -120,24 +80,188 @@ GAME_STATUS_BEFORE  = 1
 GAME_STATUS_STARTED = 2
 GAME_STATUS_FINAL   = 3
 
-
-#Number of the fields in the api
-GAME_ID = 2
-GAME_ID_LOGS = 12
-GAME_STATUS_ID = 3
-HOME_TEAM_ID = 6
-AWAY_TEAM_ID = 7
-LIVE_GAME_STATUS = 12
-
 #TIME_ZONE
 TIME_ZONE = pytz.timezone('US/Eastern')
+
+#Scoreboard update hour
+SCOREBOARD_UPDATE_HOUR = 11
 
 #DIVISION CONFERENCES
 WEST_CONF = ["southwest","pacific","northwest"]
 EAST_CONF = ["southeast","atlantic","central"]
 
+#conf names
+conf_names = {
+    "west" : "west",
+    "western" : "west",
+    "w" : "west",
+    "western conference" : "west",
+    "east" : "east",
+    "eastern" : "east",
+    "e" : "east",
+    "pacific" : "pacific",
+    "northwest": "northwest",
+    "southwest": "southwest",
+    "atlantic" : "atlantic",
+    "central": "central",
+    "southeast": "southeast",
+    "tank" : "tank",
+    "tankathon" : "tank"
+}
+
+#team name
+teams_names = { 
+    'hawks': '1610612737',
+    'atlanta': '1610612737',
+    'atl': '1610612737',
+    'atlanta hawks': '1610612737',
+    'celtics': '1610612738',
+    'boston': '1610612738',
+    'bos': '1610612738',
+    'boston celtics': '1610612738',
+    'nets': '1610612751',
+    'brooklyn': '1610612751',
+    'brk': '1610612751',
+    'brooklyn nets': '1610612751',
+    'hornets': '1610612766',
+    'charlotte': '1610612766',
+    'cha': '1610612766',
+    'charlotte hornets': '1610612766',
+    'bulls': '1610612741',
+    'chicago': '1610612741',
+    'chi': '1610612741',
+    'chicago bulls': '1610612741',
+    'cavaliers': '1610612739',
+    'cleveland': '1610612739',
+    'cle': '1610612739',
+    'cleveland cavaliers': '1610612739',
+    'cavs': '1610612739',
+    'mavericks': '1610612742',
+    'dallas': '1610612742',
+    'dal': '1610612742',
+    'dallas mavericks': '1610612742',
+    'mavs': '1610612742',
+    'nuggets': '1610612743',
+    'denver': '1610612743',
+    'den': '1610612743',
+    'denver nuggets': '1610612743',
+    'pistons': '1610612765',
+    'detroit': '1610612765',
+    'det': '1610612765',
+    'detroit pistons': '1610612765',
+    'warriors': '1610612744',
+    'golden state': '1610612744',
+    'gsw': '1610612744',
+    'golden state warriors': '1610612744',
+    'rockets': '1610612745',
+    'houston': '1610612745',
+    'hou': '1610612745',
+    'houston rockets': '1610612745',
+    'pacers': '1610612754',
+    'indiana': '1610612754',
+    'ind': '1610612754',
+    'indiana pacers': '1610612754',
+    'clippers': '1610612746',
+    'la clippers': '1610612746',
+    'lac': '1610612746',
+    'los angeles clippers': '1610612746',
+    'lakers': '1610612747',
+    'la lakers': '1610612747',
+    'lal': '1610612747',
+    'los angeles lakers': '1610612747',
+    'grizzlies': '1610612763',
+    'memphis': '1610612763',
+    'mem': '1610612763',
+    'memphis grizzlies': '1610612763',
+    'heat': '1610612748',
+    'miami': '1610612748',
+    'mia': '1610612748',
+    'miami heat': '1610612748',
+    'bucks': '1610612749',
+    'milwaukee': '1610612749',
+    'mil': '1610612749',
+    'bucks': '1610612749',
+    'timberwolves': '1610612750',
+    'minnesota': '1610612750',
+    'min': '1610612750',
+    'wolves': '1610612750',
+    'minnesota timberwolves': '1610612750',
+    'pelicans': '1610612740',
+    'new orleans': '1610612740',
+    'nop': '1610612740',
+    'pels': '1610612740',
+    'new orleans pelicans': '1610612740',
+    'knicks': '1610612752',
+    'new york': '1610612752',
+    'nyk': '1610612752',
+    'new york knicks': '1610612752',
+    'thunder': '1610612760',
+    'oklahoma city': '1610612760',
+    'okc': '1610612760',
+    'oklahoma city thunder': '1610612760',
+    'magic': '1610612753',
+    'orlando': '1610612753',
+    'orl': '1610612753',
+    'orlando magic': '1610612753',
+    'sixers': '1610612755',
+    'philadelphia': '1610612755',
+    '76ers': '1610612755',
+    '6ers': '1610612755',
+    'phi': '1610612755',
+    'philadelphia 76ers': '1610612755',
+    'suns': '1610612756',
+    'phoenix': '1610612756',
+    'phx': '1610612756',
+    'hawks': '1610612756',
+    'blazers': '1610612757',
+    'portland': '1610612757',
+    'por': '1610612757',
+    'trail blazers': '1610612757',
+    'portland trail blazers': '1610612757',
+    'kings': '1610612758',
+    'sacramento': '1610612758',
+    'sac': '1610612758',
+    'sacramento kings': '1610612758',
+    'spurs': '1610612759',
+    'san antonio': '1610612759',
+    'sas': '1610612759',
+    'san antonio spurs': '1610612759',
+    'raps': '1610612761',
+    'raptors': '1610612761',
+    'toronto': '1610612761',
+    'craps': '1610612761',
+    'tor': '1610612761',
+    'toronto raptors': '1610612761',
+    'jazz': '1610612762',
+    'utah': '1610612762',
+    'uta': '1610612762',
+    'utah jazz': '1610612762',
+    'wizards': '1610612764',
+    'washington': '1610612764',
+    'wsh': '1610612764',
+    'washington wizards': '1610612764'
+}
 
 
+hinkie_quotes = ["The goal is simple: A larger quiver. This quiver will give us more options immediately and more options over time.",
+                 "Why do we watch basketball games front to back? Why not watch games back to front, or out of order?",
+                 "This approach, like many that create value, isn't popular, particularly locally.",
+                 "It's about the willingness to say three simple words : I don't know.",
+                 "You have to be non-consensus and right.",
+                 "Fear has been the dominant motivator of the actions of too many for too long.",
+                 "Maintain the longest view in the room.",
+                 "Progress isn't linear.",
+                 "We talk a lot about the process, not the outcome.",
+                 "A new scientific truth does not triumph by convincing its opponents and making them see the light, but rather because its opponents eventually die.",
+                 "Violence at the rim.",
+                 "Grit matters.",
+                 "In this league, the long view picks at the lock of mediocrity.",
+                 "Team building is about one thing - the players.",
+                 "Value optionality",
+                 "You don't get to the moon by climbing a tree.",
+                 "A competitive league like the NBA necessitates a zig while our competitors comfortably zag.",
+                 "Sometimes the optimal place for your light is hiding directly under a bushel.",
+                 "It is critical to be cycle aware in a talent-driven league."]
 
 
 
