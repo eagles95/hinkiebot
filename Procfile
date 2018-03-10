@@ -1,1 +1,1 @@
-worker python27 bot.py
+worker python bot.py
