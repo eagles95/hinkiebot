@@ -14,7 +14,8 @@ def getGame(teamID):
     response = urllib.urlopen(url)
     games = json.loads(response.read())["games"]
     for i in range(0,len(games)):
-        if(((int(games[i]["vTeam"]["teamId"]) == teamID) or (int(games[i]["hTeam"]["teamId"] == teamID))) and (games[i]["statusNum"] == constants.GAME_STATUS_STARTED)):
+        if(((int(games[i]["vTeam"]["teamId"]) == teamID) or (int(games[i]["hTeam"]["teamId"]) == teamID)) and (games[i]["statusNum"] == constants.GAME_STATUS_STARTED)):
+            print(teamID)
             return games[i]
 
     #team not playing rn,need to get it from logs
@@ -31,16 +32,16 @@ Returns the Score of the current game for that teamID
 def getGameScore(teamID):
     print("score method")
     game = getGame(teamID)
-    ret = constants.id_to_team_name[int(game["vTeam"]["teamId"])] + " "  + game["vTeam"]["score"] + " @ " + constants.id_to_team_name[int(game["hTeam"]["teamId"])] + " "  + game["hTeam"]["score"]  
+    ret = constants.id_to_team_name[int(game["vTeam"]["teamId"])] + " "  + game["vTeam"]["score"] + " @ " + constants.id_to_team_name[int(game["hTeam"]["teamId"])] + " "  + game["hTeam"]["score"]
     if(game["statusNum"] == constants.GAME_STATUS_FINAL):
         return ret + str(', FINAL')
     elif (game["period"]["isHalftime"] == True):
         return ret + str(', HALF')
     else:
-        ret =  ret + ", " + game["clock"] +" " 
+        ret =  ret + ", " + game["clock"] + " "
         period = game["period"]["current"]
         if (period <= 4):
-            return ret + "Q" + period
+            return ret + str(period)+ "Q"
         else:
             return ret + "OT"
 

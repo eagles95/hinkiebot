@@ -203,6 +203,8 @@ def runCommand(command,args):
                 return scoreboard_commands[command]()
             elif(command == "quote"):
                 return getHinkieQuote()
+            elif(command == "info" or command == "commands"):
+                return "List of commands here : https://hinkiebot.herokuapp.com/commands"
         else:
             args = args.lower()
             if(command in team_commands):
