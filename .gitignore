@@ -1,8 +1,2 @@
 *.pyc
-main.py
 tests.py
-runtime.txt
-Procfile
-requirements.txt
-example.py
-__init__.py
