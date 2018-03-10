@@ -20,7 +20,6 @@ def getGame(teamID):
 
     #team not playing rn,need to get it from logs
     url = "http://data.nba.net/data/10s/prod/v1/" + constants.SEASON_YEAR + "/teams/" + constants.id_to_team_name[teamID].lower()  + "/schedule.json"
-    print("wow")
     response = urllib.urlopen(url)
     data = json.loads(response.read())
     lastGame = data["league"]["lastStandardGamePlayedIndex"]

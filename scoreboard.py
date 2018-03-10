@@ -49,6 +49,3 @@ def getScoreboard():
                     ret = ret + "OT; "
 
     return ret
-
-
-print(getScoreboard())
