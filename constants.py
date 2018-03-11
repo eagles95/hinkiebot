@@ -242,8 +242,7 @@ teams_names = {
     'washington wizards': '1610612764'
 }
 
-
-hinkie_quotes = ["The goal is simple: A larger quiver. This quiver will give us more options immediately and more options over time.",
+hinkie_quotes=["The goal is simple: A larger quiver. This quiver will give us more options immediately and more options over time.",
                  "Why do we watch basketball games front to back? Why not watch games back to front, or out of order?",
                  "This approach, like many that create value, isn't popular, particularly locally.",
                  "It's about the willingness to say three simple words : I don't know.",
@@ -262,14 +261,4 @@ hinkie_quotes = ["The goal is simple: A larger quiver. This quiver will give us 
                  "A competitive league like the NBA necessitates a zig while our competitors comfortably zag.",
                  "Sometimes the optimal place for your light is hiding directly under a bushel.",
                  "It is critical to be cycle aware in a talent-driven league."]
-
-
-
-
-
-
-
-
-
-
 

@@ -23,7 +23,7 @@ player_commands = {"recent" : player.getPlayerLast3,
 }
 
 def getHinkieQuote():
-    return constants.hinkie_quotes[randint(0,len(hinkie_quotes)-1)]
+    return constants.hinkie_quotes[randint(0,len(constants.hinkie_quotes)-1)]
 
 
 def runCommand(command,args):
@@ -50,3 +50,4 @@ def runCommand(command,args):
                     return "Player name not found"
             else:
                 return None
+
