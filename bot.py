@@ -30,7 +30,7 @@ class HinkieBot(ch.RoomManager):
 
 
 
-rooms = ["hinkiebottesterxd"]
+rooms = ["hinkiebottesterxd","acleenba"]
 bot_name = "HinkieBot"
 bot_pw = "fuckthecowboys"
 HinkieBot.easy_start(rooms,bot_name,bot_pw)
