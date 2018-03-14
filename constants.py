@@ -80,7 +80,7 @@ GAME_STATUS_BEFORE  = 1
 GAME_STATUS_STARTED = 2
 GAME_STATUS_FINAL   = 3
 
-#TIME_ZONE
+#SET TIME ZONE
 TIME_ZONE = pytz.timezone('US/Eastern')
 
 #Scoreboard update hour
@@ -185,6 +185,7 @@ teams_names = {
     'minnesota': '1610612750',
     'min': '1610612750',
     'wolves': '1610612750',
+    'twolves' : '1610612750',
     'minnesota timberwolves': '1610612750',
     'pelicans': '1610612740',
     'new orleans': '1610612740',
