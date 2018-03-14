@@ -17,10 +17,15 @@ td, th {
 tr:nth-child(even) {
     background-color: #dddddd;
 }
+footer {
+    display: table;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
 </style>
 </head>
 <body>
-
 <h2>Commands</h2>
 
 <table>
@@ -49,7 +54,7 @@ tr:nth-child(even) {
     <td>Returns common stats for that teamName latest game</td>
   </tr>
   <tr>
-    <td>&standings conference/division name</td>
+    <td>&standings conference/division name/tank</td>
     <td>Returns full standings for that conference/division </td>
   </tr>
   <tr>
@@ -74,7 +79,7 @@ tr:nth-child(even) {
   </tr>
   <tr>
     <td>&amp;quote</td>
-    <td>Returns one of Sam Hinkie's idioms/quotes, full list here</td>
+    <td>Returns one of Sam Hinkie's idioms/quotes, full list <a href="https://hinkiebot.herokuapp.com/quotes">here</a></td>
   </tr>
   <tr>
     <td>&commands or &info</td>
@@ -95,14 +100,15 @@ tr:nth-child(even) {
     <td>Could be the city name(portland, toronto, philadelphia, etc),team name(mavericks, thunder, etc), both city and team name(houston rockets, utah jazz, etc), the abbreviation(PHI, LAL, BOS, etc) or a nickname (cavs, mavs, raps, sixers, etc)</td>
   </tr>
   <tr>
-    <td>conference/division name</td>
-    <td>west, east, southwest, pacific, northwest, southeast, atlantic, central</td>
+    <td>conference/division name/tank</td>
+    <td>west, east, southwest, pacific, northwest, southeast, atlantic, central or tank (standings in reverse)</td>
   </tr>
   <tr>
     <td>playerName</td>
     <td>Has to be in the format: firstName lastName(lebron james, joel embiid, etc). OBS : I will try to get it working for players that are known by only one name or nickname (lebron, giannis, lonzo, etc)</td>
   </tr>
 </table>
-
+<h5>message eagles95 on chatango for more info</h5>
+<h5>steal code/contribute with a pull request: <a href="https://github.com/eagles95/hinkiebot">github</a></h5>
 </body>
 </html>
