@@ -33,7 +33,6 @@ def getGameScore(teamID):
     print("score method")
     try:
         game = getGame(teamID)
-        print(str(game))
         ret = constants.id_to_team_name[int(game["vTeam"]["teamId"])] + " "  + game["vTeam"]["score"] + " @ " + constants.id_to_team_name[int(game["hTeam"]["teamId"])] + " "  + game["hTeam"]["score"]
         if(game["statusNum"] == constants.GAME_STATUS_FINAL):
             return ret + str(', FINAL')

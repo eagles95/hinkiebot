@@ -46,6 +46,6 @@ def getScoreboard():
                 if (period <= 4):
                     ret = ret + str(period) + "Q; "
                 else:
-                    ret = ret + "OT; "
+                    ret = ret + "OT" + str(period - 4) 
 
     return ret
