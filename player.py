@@ -77,7 +77,7 @@ def getPlayerLiveStats(fName,lName):
             ret += stats["assists"] + " AST; " + stats["totReb"] + " REB; " + stats["blocks"] + " BLK; "
             ret += stats["steals"] + " STL; " + stats["turnovers"] + " TO; " + stats["plusMinus"] + " +/-"
             return ret + " in " + stats["min"] + " mins"
-    return "player/game not found"
+    return player["firstName"] + " " + player["lastName"] + " is inactive for the current " + constants.id_to_team_name[int(player["teamId"])] + "game"
 
 def calculate_age(birth):
     born = datetime.strptime(birth, '%Y-%m-%d').date()

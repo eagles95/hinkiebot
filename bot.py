@@ -12,6 +12,7 @@ class HinkieBot(ch.RoomManager):
 
     def onDisconnect(self, room):
         print("Disconnected from "+room.name)
+        self.joinRoom(room.name)
 
     def onMessage(self, room, user, message):
         try:
@@ -29,7 +30,7 @@ class HinkieBot(ch.RoomManager):
                 if(ret!=None):
                     room.message(str(ret))
         except:
-            print("weird error")
+            print("weird encoding error")
 
 rooms = ["acleenba","hinkiebottesterxd"]
 bot_name = "HinkieBot"
