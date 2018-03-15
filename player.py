@@ -15,10 +15,16 @@ def getPlayerID(firstN,lastN=None):
     url = "http://data.nba.net/data/10s/prod/v1/" + constants.SEASON_YEAR  +"/players.json"
     response = urllib.urlopen(url)
     data = json.loads(response.read())["league"]["standard"]
-    for i in range(0,len(data)):
-        if(data[i]["firstName"].lower() == firstN.lower() and data[i]["lastName"].lower() == lastN.lower()):
-            return data[i]
-    raise PlayerNotFoundException
+    if(lastN == None):
+        for i in range(0,len(data)):
+            if(data[i]["firstName"].lower() == firstN.lower() or data[i]["lastName"].lower() == firstN.lower()):
+                return data[i]
+        raise PlayerNotFoundException
+    else:
+        for i in range(0,len(data)):
+            if(data[i]["firstName"].lower() == firstN.lower() and data[i]["lastName"].lower() == lastN.lower()):
+                return data[i]
+        raise PlayerNotFoundException
 
 def getPlayerLast3(fName,lName):
     try:

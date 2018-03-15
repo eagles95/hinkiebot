@@ -47,7 +47,7 @@ def runCommand(command,args):
                     firstName,lastName = args.split(" ",1)
                     return player_commands[command](firstName,lastName)
                 except:
-                    return "Player name not found"
+                    return player_commands[command](args,None)
             else:
                 return None
 
