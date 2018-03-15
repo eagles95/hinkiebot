@@ -1,5 +1,4 @@
 *.pyc
 tests.py
 main.py
-lib/__init__.py
 lib/example.py

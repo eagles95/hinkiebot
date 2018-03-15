@@ -22,8 +22,8 @@ class HinkieBot(ch.RoomManager):
                 msg = msg[1:]
                 try:
                     command,args = msg.split(" ",1)
-                    print("command" + command)
-                    print("args" + args)
+                    print("command: " + command)
+                    print("args: " + args)
                     ret = commands.runCommand(command,args)
                 except:
                     ret = commands.runCommand(msg,None)
@@ -31,7 +31,6 @@ class HinkieBot(ch.RoomManager):
                     room.message(str(ret))
         except:
             print("weird encoding error")
-
 rooms = ["acleenba","hinkiebottesterxd"]
 bot_name = "HinkieBot"
 bot_pw = ""

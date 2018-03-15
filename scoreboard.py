@@ -40,12 +40,12 @@ def getScoreboard():
         else:
             ret  = ret + vTeam + " " + vTeamScore + " @ " + hTeam + " " + hTeamScore + ", "
             if (gameStatus == constants.GAME_STATUS_FINAL):
-                ret = ret + "FINAL" + "; "
+                ret = ret + "FINAL" + "/    "
             else:
                 period = data[i]["period"]["current"]
                 if (period <= 4):
-                    ret = ret + str(period) + "Q; "
+                    ret = ret + str(period) + "Q/    "
                 else:
-                    ret = ret + "OT" + str(period - 4) 
+                    ret = ret + "OT" + str(period - 4) + "/    "
 
     return ret

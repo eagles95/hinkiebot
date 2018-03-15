@@ -6,24 +6,32 @@ import pytz
 import constants
 
 """
-Returns the current gameID for that teamID
+Returns game if team is playing rn
 """
-def getGame(teamID):
+def isTeamPlaying(teamID):
     date = datetime.datetime.now(constants.TIME_ZONE).strftime('%Y%m%d')
     url = "http://data.nba.net/data/10s/prod/v1/" + date + "/scoreboard.json"
     response = urllib.urlopen(url)
     games = json.loads(response.read())["games"]
     for i in range(0,len(games)):
         if(((int(games[i]["vTeam"]["teamId"]) == teamID) or (int(games[i]["hTeam"]["teamId"]) == teamID)) and (games[i]["statusNum"] == constants.GAME_STATUS_STARTED)):
-            print(teamID)
             return games[i]
+    return None
 
-    #team not playing rn,need to get it from logs
-    url = "http://data.nba.net/data/10s/prod/v1/" + constants.SEASON_YEAR + "/teams/" + constants.id_to_team_name[teamID].lower()  + "/schedule.json"
-    response = urllib.urlopen(url)
-    data = json.loads(response.read())
-    lastGame = data["league"]["lastStandardGamePlayedIndex"]
-    return data["league"]["standard"][lastGame]
+"""
+Returns the current gameID for that teamID
+"""
+def getGame(teamID):
+    game = isTeamPlaying(teamID)
+    if (game != None):
+        return game
+    else:
+        #team not playing rn,need to get it from logs
+        url = "http://data.nba.net/data/10s/prod/v1/" + constants.SEASON_YEAR + "/teams/" + constants.id_to_team_name[teamID].lower()  + "/schedule.json"
+        response = urllib.urlopen(url)
+        data = json.loads(response.read())
+        lastGame = data["league"]["lastStandardGamePlayedIndex"]
+        return data["league"]["standard"][lastGame]
 
 
 """
@@ -105,6 +113,8 @@ Get time,date and opponnent of next game
 def getNextGame(teamID):
     data = loadSched(teamID)
     lastGame = data["league"]["lastStandardGamePlayedIndex"]
+    if (isTeamPlaying(teamID) != None):
+        lastGame = lastGame + 1
     dateTime = getDatetime(data["league"]["standard"][lastGame+1]["startTimeUTC"]) + " ET"
     if (data["league"]["standard"][lastGame+1]["vTeam"]["teamId"] == str(teamID)):
         return constants.id_to_team_name[teamID] + " @ " + constants.id_to_team_name[int(data["league"]["standard"][lastGame+1]["hTeam"]["teamId"])] + ", " + dateTime
