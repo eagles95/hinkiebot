@@ -54,7 +54,10 @@ def getPlayerLast3(fName,lName):
     return ret
 
 def getPlayerStats(fName,lName):
-    player = getPlayerID(fName,lName)
+    try:
+        player = getPlayerID(fName,lName)
+    except:
+        return("Player name not found")
     playerID = player["personId"]
     url = "http://data.nba.net/data/10s/prod/v1/" + str(constants.SEASON_YEAR) +  "/players/" + str(playerID) + "_profile.json"
     response = urllib.urlopen(url)
