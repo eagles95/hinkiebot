@@ -4,6 +4,7 @@ import datetime
 import urllib
 import pytz
 import constants
+import calendar
 
 """
 Returns game if team is playing rn
@@ -95,7 +96,8 @@ def getDatetime(dateTime):
     dateTime = str(date) + str(" ") + str(time)
     dateTime = datetime.datetime.strptime( dateTime, '%Y-%m-%d %H:%M:%S')
     dateTime = dateTime.replace(tzinfo=pytz.utc).astimezone(constants.TIME_ZONE)
-    return datetime.datetime.strptime( str(dateTime).rsplit('-',1)[0], '%Y-%m-%d %H:%M:%S').strftime("%m/%d/%Y %I:%M %p")
+    day = calendar.day_name[dateTime.weekday()]
+    return str(day) + ", "+ datetime.datetime.strptime( str(dateTime).rsplit('-',1)[0], '%Y-%m-%d %H:%M:%S').strftime("%m/%d/%Y %I:%M %p")
     
 
 
@@ -119,7 +121,7 @@ def getNextGame(teamID):
     if (data["league"]["standard"][lastGame+1]["vTeam"]["teamId"] == str(teamID)):
         return constants.id_to_team_name[teamID] + " @ " + constants.id_to_team_name[int(data["league"]["standard"][lastGame+1]["hTeam"]["teamId"])] + ", " + dateTime
     else:
-        return constants.id_to_team_name[int(data["league"]["standard"][lastGame+1]["vTeam"]["teamId"])] + " @ "+ constants.id_to_team_name[teamID] + ", " + dateTime
+        return constants.id_to_team_name[int(data["league"]["standard"][lastGame+1]["vTeam"]["teamId"])] + " @ "+ constants.id_to_team_name[teamID] + ". " + dateTime
 
 
 
