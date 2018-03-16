@@ -40,14 +40,15 @@ def runCommand(command,args):
                 return team_commands[command](int(constants.teams_names[args]))
             elif(command in standings_commands):
                 return standings_commands[command](constants.conf_names[args])
-            elif(command in scoreboard_commands):
-                return scoreboard_commads[command]()
             elif(command in player_commands):
-                try:
-                    firstName,lastName = args.split(" ",1)
-                    return player_commands[command](firstName,lastName)
-                except:
-                    return player_commands[command](args,None)
+                if(args == "egg"):
+                    return "Miss me with that egg shit fam"
+                else:
+                    try:
+                        firstName,lastName = args.split(" ",1)
+                        return player_commands[command](firstName,lastName)
+                    except:
+                        return player_commands[command](args,None)
             else:
                 return None
 
