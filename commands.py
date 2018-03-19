@@ -43,6 +43,8 @@ def runCommand(command,args):
             elif(command in player_commands):
                 if(args == "egg"):
                     return "Miss me with that egg shit fam"
+                elif(args == "goat"):
+                    return "28/43, 373yds, 3TD, 1 recyds, 1 recTD, SBLII MVP"
                 else:
                     try:
                         firstName,lastName = args.split(" ",1)
