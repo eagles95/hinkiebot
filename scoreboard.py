@@ -36,7 +36,7 @@ def getScoreboard():
         vTeamScore = data[i]["vTeam"]["score"]
         gameStatus = data[i]["statusNum"]
         if(gameStatus == constants.GAME_STATUS_BEFORE):
-            ret =  ret + vTeam + " @ " + hTeam + ", " + data[i]["startTimeEastern"] + "; "
+            ret =  ret + vTeam + " @ " + hTeam + ", " + data[i]["startTimeEastern"] + " /// "
         else:
             ret  = ret + vTeam + " " + vTeamScore + " @ " + hTeam + " " + hTeamScore + ", "
             if (gameStatus == constants.GAME_STATUS_FINAL):
