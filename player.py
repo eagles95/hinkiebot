@@ -89,6 +89,14 @@ def getPlayerLiveStats(fName,lName):
             return ret + " in " + stats["min"] + " mins"
     return player["firstName"] + " " + player["lastName"] + " is inactive for the current " + constants.id_to_team_name[int(player["teamId"])] + " game"
 
+def getRemain(flag,stat):
+    if(flag == True):
+        return stat
+    elif(stat >= 10):
+        return 0
+    else:
+        return (10 - stat)
+
 def tripDubWatch(fName,lName):
     try:
         player = getPlayerID(fName,lName)
@@ -97,16 +105,32 @@ def tripDubWatch(fName,lName):
     boxscore = game.getBoxScore(int(player["teamId"]))
     activePlayers = boxscore["stats"]["activePlayers"]
     ret = ""
+    tail = ""
     for i in range(0,len(activePlayers)):
-        stats = activePlayers[i]
-        ret = player["firstName"] + " " + player["lastName"] + " "
-        triple_double = [("pts",int(stats["points"])),("ast",int(stats["assists"])),("blk",int(stats["blocks"])),("stl",int(stats["steals"])),("reb",int(stats["totReb"]))]
-        triple_double.sort(key=itemgetter(0),reverse=True)
-        if(triple_double[2] >= 10):
-            ret += "HAS COMPLETED A TRIPLE DOUBLE( "+ str(triple_double[0][1]) + triple_double[0][0] +" , "
-            ret += str(triple_double[1][1]) +triple_double[1][0] +", "
-            ret += str(triple_double[2][1]) + triple_double[2][0] + " )"
-        else:
+        if(activePlayers[i]["personId"] == player["personId"]):
+            stats = activePlayers[i]
+            ret = player["firstName"] + " " + player["lastName"] + " "
+            triple_double = [("pts",int(stats["points"])),("ast",int(stats["assists"])),("blk",int(stats["blocks"])),("stl",int(stats["steals"])),("reb",int(stats["totReb"]))]
+            triple_double.sort(key=itemgetter(1),reverse=True)
+            flag = False
+            if(triple_double[2][1] >= 10):
+                ret += "HAS COMPLETED A TRIPLE DOUBLE: "
+                flag = True
+            elif(boxscore["basicGameData"]["statusNum"] == constants.GAME_STATUS_FINAL):
+                ret += "did not finish the game with a triple double: "
+                flag = True
+            else:
+                ret += "still needs: "
+                tail = " for a triple double"
+            ret += str(getRemain(flag,triple_double[0][1])) + triple_double[0][0] +", "
+            ret += str(getRemain(flag,triple_double[1][1])) +triple_double[1][0] +", "
+            ret += str(getRemain(flag,triple_double[2][1])) + triple_double[2][0]
+            ret += tail
+            if (boxscore["basicGameData"]["hTeam"]["teamId"] == player["teamId"]):
+                ret += " (vs " + constants.id_to_team_name[int(boxscore["basicGameData"]["vTeam"]["teamId"])] + ")"
+            else:
+                ret += " (@ " + constants.id_to_team_name[int(boxscore["basicGameData"]["hTeam"]["teamId"])] + ")"
+    return ret
 
 def calculate_age(birth):
     born = datetime.strptime(birth, '%Y-%m-%d').date()

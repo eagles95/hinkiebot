@@ -51,7 +51,8 @@ scoreboard_commands = {"scoreboard" : scoreboard.getScoreboard}
 player_commands = {"recent" : player.getPlayerLast3,
                    "stats" : player.getPlayerStats,
                    "livestats" : player.getPlayerLiveStats,
-                   "profile" : player.getProfile
+                   "profile" : player.getProfile,
+                    "tdalert" : player.tripDubWatch
 }
 
 misc_commands = {"quote": getHinkieQuote,"info" : getInfo,"commands" : getInfo}
