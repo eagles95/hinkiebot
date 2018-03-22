@@ -5,35 +5,18 @@ import scoreboard
 import constants
 from random import randint
 
-team_commands = {"score" : game.getGameScore,
-                "nextgame" : game.getNextGame,
-                "last5" : game.getLast5,
-                "record": standings.teamRecord,
-                "teamstats" : game.getTeamStats
-}
-
-standings_commands = {"standings" : standings.getStandings}
-
-scoreboard_commands = {"scoreboard" : scoreboard.getScoreboard}
-
-player_commands = {"recent" : player.getPlayerLast3,
-                   "stats" : player.getPlayerStats,
-                   "livestats" : player.getPlayerLiveStats,
-                   "profile" : player.getProfile
-}
-
 def getHinkieQuote():
     return constants.hinkie_quotes[randint(0,len(constants.hinkie_quotes)-1)]
 
+def getInfo():
+	return "list of commands here : https://hinkiebot.herokuapp.com/commands"
 
 def runCommand(command,args):
         if(args == None):
             if(command in scoreboard_commands):
                 return scoreboard_commands[command]()
-            elif(command == "quote"):
-                return getHinkieQuote()
-            elif(command == "info" or command == "commands"):
-                return "List of commands here : https://hinkiebot.herokuapp.com/commands"
+            elif(command in misc_commands):
+                return misc_commands[command]()
         else:
             args = args.lower()
             if(command in team_commands):
@@ -54,3 +37,21 @@ def runCommand(command,args):
             else:
                 return None
 
+team_commands = {"score" : game.getGameScore,
+                "nextgame" : game.getNextGame,
+                "last5" : game.getLast5,
+                "record": standings.teamRecord,
+                "teamstats" : game.getTeamStats
+}
+
+standings_commands = {"standings" : standings.getStandings}
+
+scoreboard_commands = {"scoreboard" : scoreboard.getScoreboard}
+
+player_commands = {"recent" : player.getPlayerLast3,
+                   "stats" : player.getPlayerStats,
+                   "livestats" : player.getPlayerLiveStats,
+                   "profile" : player.getProfile
+}
+
+misc_commands = {"quote": getHinkieQuote,"info" : getInfo,"commands" : getInfo}

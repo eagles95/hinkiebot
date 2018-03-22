@@ -5,6 +5,7 @@ import constants
 import game
 from datetime import datetime
 from datetime import date
+from operator import itemgetter
 
 class PlayerNotFoundException(Exception):
         pass
@@ -35,7 +36,7 @@ def getPlayerLast3(fName,lName):
     url = "http://data.nba.net/data/10s/prod/v1/" + str(constants.SEASON_YEAR) +  "/players/" + str(playerID) + "_gamelog.json"
     response = urllib.urlopen(url)
     data =  json.loads(response.read())["league"]["standard"]
-    ret = player["firstName"] + " " + player["lastName"] + "(" + constants.id_to_team_name[int(player["teamId"])] + ") " 
+    ret = player["firstName"] + " " + player["lastName"] + "(" + constants.id_to_team_name[int(player["teamId"])] + ") "
     for i in range(2,-1,-1):
         stats = data[i]["stats"]
         ret = ret + stats["points"] + " PTS/" +  stats["totReb"] + " REBS/" + stats["assists"] + " AST "
@@ -87,6 +88,25 @@ def getPlayerLiveStats(fName,lName):
             ret += stats["steals"] + " STL; " + stats["turnovers"] + " TO; " + stats["plusMinus"] + " +/-"
             return ret + " in " + stats["min"] + " mins"
     return player["firstName"] + " " + player["lastName"] + " is inactive for the current " + constants.id_to_team_name[int(player["teamId"])] + " game"
+
+def tripDubWatch(fName,lName):
+    try:
+        player = getPlayerID(fName,lName)
+    except:
+        return "Player name not found"
+    boxscore = game.getBoxScore(int(player["teamId"]))
+    activePlayers = boxscore["stats"]["activePlayers"]
+    ret = ""
+    for i in range(0,len(activePlayers)):
+        stats = activePlayers[i]
+        ret = player["firstName"] + " " + player["lastName"] + " "
+        triple_double = [("pts",int(stats["points"])),("ast",int(stats["assists"])),("blk",int(stats["blocks"])),("stl",int(stats["steals"])),("reb",int(stats["totReb"]))]
+        triple_double.sort(key=itemgetter(0),reverse=True)
+        if(triple_double[2] >= 10):
+            ret += "HAS COMPLETED A TRIPLE DOUBLE( "+ str(triple_double[0][1]) + triple_double[0][0] +" , "
+            ret += str(triple_double[1][1]) +triple_double[1][0] +", "
+            ret += str(triple_double[2][1]) + triple_double[2][0] + " )"
+        else:
 
 def calculate_age(birth):
     born = datetime.strptime(birth, '%Y-%m-%d').date()
