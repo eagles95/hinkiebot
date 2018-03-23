@@ -33,5 +33,5 @@ class HinkieBot(ch.RoomManager):
             print("weird encoding error")
 rooms = ["hinkiebottesterxd","acleenba"]
 bot_name = "HinkieBot"
-bot_pw = ""
+bot_pw = "fuckthecowboys"
 HinkieBot.easy_start(rooms,bot_name,bot_pw)
