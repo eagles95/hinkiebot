@@ -130,6 +130,8 @@ def tripDubWatch(fName,lName):
                 ret += " (vs " + constants.id_to_team_name[int(boxscore["basicGameData"]["vTeam"]["teamId"])] + ")"
             else:
                 ret += " (@ " + constants.id_to_team_name[int(boxscore["basicGameData"]["hTeam"]["teamId"])] + ")"
+    if (ret == ""):
+        ret = player["firstName"] + " " + player["lastName"] + " is inactive for the current " + constants.id_to_team_name[int(player["teamId"])] + " game"
     return ret
 
 def calculate_age(birth):
