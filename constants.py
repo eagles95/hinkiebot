@@ -180,7 +180,7 @@ teams_names = {
     'bucks': '1610612749',
     'milwaukee': '1610612749',
     'mil': '1610612749',
-    'bucks': '1610612749',
+    'milwaukee bucks': '1610612749',
     'timberwolves': '1610612750',
     'minnesota': '1610612750',
     'min': '1610612750',
@@ -213,7 +213,7 @@ teams_names = {
     'suns': '1610612756',
     'phoenix': '1610612756',
     'phx': '1610612756',
-    'hawks': '1610612756',
+    'phoenix suns': '1610612756',
     'blazers': '1610612757',
     'portland': '1610612757',
     'por': '1610612757',
@@ -240,6 +240,7 @@ teams_names = {
     'wizards': '1610612764',
     'washington': '1610612764',
     'wsh': '1610612764',
+    'wiz' : '1610612764',
     'washington wizards': '1610612764'
 }
 
