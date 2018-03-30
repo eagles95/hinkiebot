@@ -2,3 +2,4 @@
 tests.py
 main.py
 lib/example.py
+*.swp
