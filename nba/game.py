@@ -10,7 +10,10 @@ import calendar
 Returns game if team is playing rn
 """
 def isTeamPlaying(teamID):
-    date = datetime.datetime.now(constants.TIME_ZONE).strftime('%Y%m%d')
+    date = datetime.datetime.now(constants.TIME_ZONE)
+    if (date.hour < constants.SCOREBOARD_UPDATE_HOUR):
+        date =  date - datetime.timedelta(days=1)
+    date = date.strftime('%Y%m%d')
     url = "http://data.nba.net/data/10s/prod/v1/" + date + "/scoreboard.json"
     response = urllib.urlopen(url)
     games = json.loads(response.read())["games"]

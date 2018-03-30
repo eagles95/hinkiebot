@@ -85,7 +85,7 @@ def getPlayerLiveStats(fName,lName):
             ret += stats["tpm"] + "/" + stats["tpa"] + " 3PT" + "; "
             ret += stats["ftm"] + "/" + stats["fta"] + " FT" + "; "
             ret += stats["assists"] + " AST; " + stats["totReb"] + " REB; " + stats["blocks"] + " BLK; "
-            ret += stats["steals"] + " STL; " + stats["turnovers"] + " TO; " + stats["plusMinus"] + " +/-"
+            ret += stats["steals"] + " STL; " + stats["turnovers"] + " TO; " + stats["plusMinus"] + " +/-; " + stats["pFouls"] + " fouls"
             return ret + " in " + stats["min"] + " mins"
     return player["firstName"] + " " + player["lastName"] + " is inactive for the current " + constants.id_to_team_name[int(player["teamId"])] + " game"
 
