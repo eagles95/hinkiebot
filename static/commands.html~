@@ -26,47 +26,8 @@ footer {
 </style>
 </head>
 <body>
-<h2> NHL Commands(work in progress tbh fam)</h2>
-<h3> All nba commands start with "#" </h3>
-<table>
-  <tr>
-    <th>Command</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>#score teamName</td>
-    <td>Returns the score of that teamName latest game</td>
-  </tr>
-  <tr>
-    <td>#stats playerName</td>
-    <td>Returns common stats for that playerName season</td>
-  </tr>
-  <tr>
-    <td>#livestats playerStats</td>
-    <td>Returns common stats for that playerName latest game</td>
-  </tr>
-  <tr>
-    <td>#commands or #info</td>
-    <td>Returns this page</td>
-  </tr>
-</table>
-<h3>Arguments</h3>
-<table>
-  <tr>
-    <th>Argument Name</th>
-    <th>Options</th>
-  </tr>
-  <tr>
-    <td>teamName</td>
-    <td>Team name or nickname(Flyers, Avs, Avalanche, Habs, Canadiens, etc) </td>
-  </tr>
-  <tr>
-    <td>playerName</td>
-    <td>Could be first name and last name (Claude Giroux,Wayne Simmonds, etc) or just one name (Giroux, Wayne, etc)/ if there are multiple players with that name it just returns whovever it finds first. </td>
-  </tr>
-</table>
-<h2> NBA Commands</h2>
-<h3> All nba commands start with "&" </h3>
+<h2>Commands</h2>
+
 <table>
   <tr>
     <th>Command</th>
@@ -131,7 +92,8 @@ footer {
 </table>
 
 
-<h3>Arguments</h3>
+<h2>Arguments</h2>
+<h4>All arguments are case insensitive</h4>
 <table>
   <tr>
     <th>Argument Name</th>
@@ -150,10 +112,8 @@ footer {
     <td>Can be in format: firstName lastName(lebron james, joel embiid, etc). UPDATE : now accepts single name lookups, first or last names. If the name is not unique it just returns whoever it finds first (lebron,fultz,giannis,lonzo,etc) </td>
   </tr>
 </table>
-
-
 <h5>message eagles95 on chatango for more info</h5>
 <h5>steal code/contribute with a pull request: <a href="https://github.com/eagles95/hinkiebot">github</a></h5>
-<h5>more nhl stuff soon, nba playoff commands soon ;) </h5>
+<h5>commands for playoffs soon ;)</h5>
 </body>
 </html>

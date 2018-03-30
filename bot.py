@@ -37,9 +37,10 @@ class HinkieBot(ch.RoomManager):
                     command,args = msg.split(" ",1)
                     print("command: " + command)
                     print("args: " + args)
-                    ret = nhlcommands.runCommand(command.lower(),args)
+                    ret = nhlcommands.runCommand(command.lower(),args.lower())
                 except:
                     ret = nhlcommands.runCommand(msg.lower(),None)
+                print("return= " + ret)
                 if(ret!=None):
                     room.message(str(ret))
         except Exception as e:
