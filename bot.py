@@ -46,5 +46,5 @@ class HinkieBot(ch.RoomManager):
             print(str(e))
 rooms = ["hinkiebottesterxd","acleenba"]
 bot_name = "HinkieBot"
-bot_pw = "fuckthecowboys"
+bot_pw = ""
 HinkieBot.easy_start(rooms,bot_name,bot_pw)
