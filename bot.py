@@ -40,12 +40,11 @@ class HinkieBot(ch.RoomManager):
                     ret = nhlcommands.runCommand(command.lower(),args.lower())
                 except:
                     ret = nhlcommands.runCommand(msg.lower(),None)
-                print("return= " + ret)
                 if(ret!=None):
                     room.message(str(ret))
         except Exception as e:
             print(str(e))
 rooms = ["hinkiebottesterxd","acleenba"]
 bot_name = "HinkieBot"
-bot_pw = ""
+bot_pw = "fuckthecowboys"
 HinkieBot.easy_start(rooms,bot_name,bot_pw)
