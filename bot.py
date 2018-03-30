@@ -1,7 +1,9 @@
 from lib import ch
-import commands
+from nba import nbacommands
+from nhl import nhlcommands
 
-prefix = "&"
+nbaprefix = "&"
+nhlprefix = "#"
 
 class HinkieBot(ch.RoomManager):
     def onConnect(self, room):
@@ -18,20 +20,31 @@ class HinkieBot(ch.RoomManager):
         try:
             msg = message.body.encode("utf-8").lstrip()
             print(msg)
-            if (msg[0] == prefix):
+            if (msg[0] == nbaprefix):
                 msg = msg[1:]
                 try:
                     command,args = msg.split(" ",1)
                     print("command: " + command)
                     print("args: " + args)
-                    ret = commands.runCommand(command,args)
+                    ret = nbacommands.runCommand(command.lower(),args)
                 except:
-                    ret = commands.runCommand(msg,None)
+                    ret = nbacommands.runCommand(msg.lower(),None)
                 if(ret!=None):
                     room.message(str(ret))
-        except:
-            print("weird encoding error")
+            elif(msg[0] == nhlprefix):
+                msg = msg[1:]
+                try:
+                    command,args = msg.split(" ",1)
+                    print("command: " + command)
+                    print("args: " + args)
+                    ret = nhlcommands.runCommand(command.lower(),args)
+                except:
+                    ret = nhlcommands.runCommand(msg.lower(),None)
+                if(ret!=None):
+                    room.message(str(ret))
+        except Exception as e:
+            print(str(e))
 rooms = ["hinkiebottesterxd","acleenba"]
 bot_name = "HinkieBot"
-bot_pw = "fuckthecowboys"
+bot_pw = ""
 HinkieBot.easy_start(rooms,bot_name,bot_pw)
