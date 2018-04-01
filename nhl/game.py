@@ -21,7 +21,7 @@ def getScore(teamID):
     game = getGame(teamID)
     awayTeam = game["teams"]["away"]["team"]["name"] + " " + str(game["teams"]["away"]["score"])
     homeTeam = game["teams"]["home"]["team"]["name"] + " " + str(game["teams"]["home"]["score"])
-    status = game["status"]["abstractGameState"]
+    status = game["status"]["detailedState"]
     return awayTeam + " @ " + homeTeam + ", " + status
 
 
