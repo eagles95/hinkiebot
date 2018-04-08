@@ -122,9 +122,12 @@ def tripDubWatch(fName,lName):
             else:
                 ret += "still needs: "
                 tail = " for a triple double"
-            ret += str(getRemain(flag,triple_double[0][1])) + triple_double[0][0] +", "
-            ret += str(getRemain(flag,triple_double[1][1])) +triple_double[1][0] +", "
-            ret += str(getRemain(flag,triple_double[2][1])) + triple_double[2][0]
+            stat_strings = []
+            for k in range(3):
+                stat_pair = triple_double[k]
+                if flag or stat_pair[1] < 10 :
+                    stat_strings.append(str(getRemain(flag,stat_pair[1])) + stat_pair[0])
+            ret += ", ".join(stat_strings)
             ret += tail
             if (boxscore["basicGameData"]["hTeam"]["teamId"] == player["teamId"]):
                 ret += " (vs " + constants.id_to_team_name[int(boxscore["basicGameData"]["vTeam"]["teamId"])] + ")"
