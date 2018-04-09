@@ -71,8 +71,6 @@ id_to_team_conf =  {
     1610612764 : 'east' 
 }
     
-
-
 #Season Year
 SEASON_YEAR = "2017"
 
@@ -89,6 +87,19 @@ def update():
 
 sched.add_interval_job(update, hours=6)
 
+#Stats
+#(makes,attempts,statname)
+FG_STATS = ["fgm","fga","FG","tpm","tpa","3PT","ftm","fta","FT"]
+
+#(stat,statname)
+TEAM_STATS = ["assists","AST","totReb","REB","blocks","BLK","steals","STL","turnovers","TO"]
+PLAYER_LIVESTATS = ["assists","AST","defReb","DEFREB","offReb","OFFREB","totReb","REB","blocks","BLK","steals","STL","turnovers","TO","plusMinus","+/-","pFouls","fouls","min","mins"]
+PLAYER_STATS = ["ppg","ppg","apg","apg","rpg","rpg","bpg","bpg","spg","spg","fgp","FG%","tpp","3PT%","ftp","FT%"] 
+
+#STATS IDS
+TEAM_STATS_ID = 0
+PLAYER_STATS_ID = 1
+PLAYER_LIVESTATS_ID = 2
 
 #GAME_STATUS_IDS
 GAME_STATUS_BEFORE  = 1

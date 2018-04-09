@@ -5,6 +5,7 @@ import urllib
 import pytz
 import constants
 import calendar
+import scoreboard
 
 """
 Returns game if team is playing rn
@@ -70,6 +71,7 @@ def getBoxScore(teamID):
 
 
 def getTeamStats(teamID):
+    print("team stats command")
     boxscore = getBoxScore(teamID)
     stats = boxscore["stats"]
     hTeamId = boxscore["basicGameData"]["hTeam"]["teamId"]
@@ -81,14 +83,8 @@ def getTeamStats(teamID):
     else:
         ret += " @ " + constants.id_to_team_name[int(hTeamId)] + ", "
         stats = stats["vTeam"]["totals"]
-    ret += stats["fgm"] + "/" + stats["fga"] + "FGS; "
-    ret += stats["tpm"] + "/" + stats["tpa"] + " 3PT; "
-    ret += stats["ftm"] + "/" + stats["fta"] + " FT; "
-    ret += stats["assists"] + " AST; " + stats["defReb"] + " DEFREB; " + stats["offReb"] + " OFFREB; " + stats["totReb"] + " REB; " 
-    ret += stats["blocks"] + " BLK; "
-    ret += stats["steals"] + " STL; " + stats["turnovers"] + " TO"
-    return ret
-
+    print("pls")
+    return ret + scoreboard.getStats(stats,constants.TEAM_STATS,constants.TEAM_STATS_ID)
 
 """
 Parse game date and time data and convert to EST timezone

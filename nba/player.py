@@ -3,6 +3,7 @@ import time
 import urllib
 import constants
 import game
+import scoreboard
 from datetime import datetime
 from datetime import date
 from operator import itemgetter
@@ -65,7 +66,8 @@ def getPlayerStats(fName,lName):
     response = urllib.urlopen(url)
     data =  json.loads(response.read())["league"]["standard"]["stats"]["latest"]
     summary = getPlayerSummary(player)
-    return summary + data["ppg"] + " ppg / " + data["apg"] + " apg / " + data["rpg"] + " rpg / " + data["bpg"] + " bpg / " + data["spg"] + " spg; " + data["fgp"] + " FG% / " + data["tpp"] + " 3PT% / " + data["ftp"] + " FT%"
+    stats = scoreboard.getStats(data,constants.PLAYER_STATS,constants.PLAYER_STATS_ID)
+    return summary + stats
 
 def getPlayerLiveStats(fName,lName):
     try:
@@ -83,13 +85,9 @@ def getPlayerLiveStats(fName,lName):
             else:
                 ret += "@ " + constants.id_to_team_name[int(boxscore["basicGameData"]["hTeam"]["teamId"])] + ", "
             stats= activePlayers[i]
-            ret += stats["points"] + "pts (" + stats["fgm"] + "/" + stats["fga"] + ")FGS ; "
-            ret += stats["tpm"] + "/" + stats["tpa"] + " 3PT" + "; "
-            ret += stats["ftm"] + "/" + stats["fta"] + " FT" + "; "
-            ret += stats["assists"] + " AST; " + stats["totReb"] + " REB; " + stats["blocks"] + " BLK; "
-            ret += stats["steals"] + " STL; " + stats["turnovers"] + " TO; " + stats["plusMinus"] + " +/-; " + stats["pFouls"] + " fouls"
-            return ret + " in " + stats["min"] + " mins"
-    return player["firstName"] + " " + player["lastName"] + " is inactive for the current " + constants.id_to_team_name[int(player["teamId"])] + " game"
+            livestats = scoreboard.getStats(stats,constants.PLAYER_LIVESTATS,constants.PLAYER_LIVESTATS_ID)
+            return ret + livestats
+    return getPlayerSummary(player) +" is inactive."
 
 def getRemain(flag,stat):
     if(flag == True):
@@ -136,7 +134,7 @@ def tripDubWatch(fName,lName):
             else:
                 ret += " (@ " + constants.id_to_team_name[int(boxscore["basicGameData"]["hTeam"]["teamId"])] + ")"
     if (ret == ""):
-        ret = player["firstName"] + " " + player["lastName"] + " is inactive for the current " + constants.id_to_team_name[int(player["teamId"])] + " game"
+        ret = getPlayerSummary(player) + "is inactive."
     return ret
 
 def calculate_age(birth):
