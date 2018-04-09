@@ -15,7 +15,7 @@ def getStats(stats,stat_headers,stat_type):
             ret += stats["points"] + "pts; "
         if((stat_type == constants.PLAYER_LIVESTATS_ID) or (stat_type == constants.TEAM_STATS_ID)):
             for i in range(0,len(constants.FG_STATS),3):
-                ret += stats[constants.FG_STATS[i]] + "/" +  stats[constants.FG_STATS[i+1]] + constants.FG_STATS[i+2] + "; "
+                ret += stats[constants.FG_STATS[i]] + "/" +  stats[constants.FG_STATS[i+1]] +" "+ constants.FG_STATS[i+2] + "; "
         for i in range(0,len(stat_headers),2):
             ret += stats[stat_headers[i]] + " " + stat_headers[i+1] + "; "
         return ret

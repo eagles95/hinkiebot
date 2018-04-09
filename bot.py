@@ -44,7 +44,7 @@ class HinkieBot(ch.RoomManager):
                     room.message(str(ret))
         except Exception as e:
             print(str(e))
-rooms = ["hinkiebottesterxd"]
+rooms = ["hinkiebottesterxd","acleenba","csnphilly","nbcsphilly"]
 bot_name = "HinkieBot"
-bot_pw = "fuckthecowboys"
+bot_pw = ""
 HinkieBot.easy_start(rooms,bot_name,bot_pw)
