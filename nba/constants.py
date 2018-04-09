@@ -1,6 +1,7 @@
 import datetime
 import pytz
-
+import requests
+from apscheduler.scheduler import Scheduler
 #Mapping IDs to names
 id_to_team_name = { 
     1610612737 : 'Hawks',
@@ -74,6 +75,20 @@ id_to_team_conf =  {
 
 #Season Year
 SEASON_YEAR = "2017"
+
+player_url = "http://data.nba.net/data/10s/prod/v1/" + SEASON_YEAR  +"/players.json"
+player_data = requests.get(player_url).json()
+
+#ScheduleStuff
+sched = Scheduler()
+sched.start()
+
+def update():
+    global player_data
+    player_data = requests.get(player_url).json()
+
+sched.add_interval_job(update, hours=6)
+
 
 #GAME_STATUS_IDS
 GAME_STATUS_BEFORE  = 1

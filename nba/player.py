@@ -13,9 +13,7 @@ class PlayerNotFoundException(Exception):
 getPlayerID
 """
 def getPlayerID(firstN,lastN=None):
-    url = "http://data.nba.net/data/10s/prod/v1/" + constants.SEASON_YEAR  +"/players.json"
-    response = urllib.urlopen(url)
-    data = json.loads(response.read())["league"]["standard"]
+    data = constants.player_data["league"]["standard"]
     if(lastN == None):
         for i in range(0,len(data)):
             if(data[i]["firstName"].lower() == firstN.lower() or data[i]["lastName"].lower() == firstN.lower()):
