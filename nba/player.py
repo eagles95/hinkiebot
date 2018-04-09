@@ -27,6 +27,9 @@ def getPlayerID(firstN,lastN=None):
                 return data[i]
         raise PlayerNotFoundException
 
+def getPlayerSummary(player):
+	return player["firstName"] + " " + player["lastName"] + "(" + constants.id_to_team_name[int(player["teamId"])] + ") "
+
 def getPlayerLast3(fName,lName):
     try:
         player = getPlayerID(fName,lName)
@@ -36,7 +39,7 @@ def getPlayerLast3(fName,lName):
     url = "http://data.nba.net/data/10s/prod/v1/" + str(constants.SEASON_YEAR) +  "/players/" + str(playerID) + "_gamelog.json"
     response = urllib.urlopen(url)
     data =  json.loads(response.read())["league"]["standard"]
-    ret = player["firstName"] + " " + player["lastName"] + "(" + constants.id_to_team_name[int(player["teamId"])] + ") "
+    ret = getPlayerSummary(player)
     for i in range(2,-1,-1):
         stats = data[i]["stats"]
         ret = ret + stats["points"] + " PTS/" +  stats["totReb"] + " REBS/" + stats["assists"] + " AST "
@@ -63,7 +66,8 @@ def getPlayerStats(fName,lName):
     url = "http://data.nba.net/data/10s/prod/v1/" + str(constants.SEASON_YEAR) +  "/players/" + str(playerID) + "_profile.json"
     response = urllib.urlopen(url)
     data =  json.loads(response.read())["league"]["standard"]["stats"]["latest"]
-    return player["firstName"] + " " + player["lastName"] + "(" + constants.id_to_team_name[int(player["teamId"])] + ") "+ data["ppg"] + " ppg / " + data["apg"] + " apg / " + data["rpg"] + " rpg / " + data["bpg"] + " bpg / " + data["spg"] + " spg; " + data["fgp"] + " FG% / " + data["tpp"] + " 3PT% / " + data["ftp"] + " FT%"
+    summary = getPlayerSummary(player)
+    return summary + data["ppg"] + " ppg / " + data["apg"] + " apg / " + data["rpg"] + " rpg / " + data["bpg"] + " bpg / " + data["spg"] + " spg; " + data["fgp"] + " FG% / " + data["tpp"] + " 3PT% / " + data["ftp"] + " FT%"
 
 def getPlayerLiveStats(fName,lName):
     try:
@@ -75,7 +79,7 @@ def getPlayerLiveStats(fName,lName):
     ret = ""
     for i in range(0,len(activePlayers)):
         if(activePlayers[i]["personId"] == player["personId"]):
-            ret =  player["firstName"] + " " + player["lastName"] + "(" + constants.id_to_team_name[int(player["teamId"])] + ") "
+            ret =  getPlayerSummary(player)
             if (boxscore["basicGameData"]["hTeam"]["teamId"] == player["teamId"]):
                 ret += "vs " + constants.id_to_team_name[int(boxscore["basicGameData"]["vTeam"]["teamId"])] + ", "
             else:
@@ -109,7 +113,7 @@ def tripDubWatch(fName,lName):
     for i in range(0,len(activePlayers)):
         if(activePlayers[i]["personId"] == player["personId"]):
             stats = activePlayers[i]
-            ret = player["firstName"] + " " + player["lastName"] + " "
+            ret = getPlayerSummary(player)
             triple_double = [("pts",int(stats["points"])),("ast",int(stats["assists"])),("blk",int(stats["blocks"])),("stl",int(stats["steals"])),("reb",int(stats["totReb"]))]
             triple_double.sort(key=itemgetter(1),reverse=True)
             flag = False
@@ -149,5 +153,5 @@ def getProfile(fName,lName):
     except:
         return "Player name not found"
     photourl = "https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/"+player["teamId"]+"/"+constants.SEASON_YEAR+"/260x190/"+player["personId"] + ".png"
-    profile = player["firstName"] + " " + player["lastName"] + "(" + constants.id_to_team_name[int(player["teamId"])] + ") #" + player["jersey"] + ", " + player["pos"] + ", " + player["heightFeet"] + "'" + player["heightInches"] + "'', "+ player["weightPounds"] + ", age " + calculate_age(player["dateOfBirthUTC"])
+    profile = getPlayerSummary(player) + "#" + player["jersey"] + ", " + player["pos"] + ", " + player["heightFeet"] + "'" + player["heightInches"] + "'', "+ player["weightPounds"] + ", age " + calculate_age(player["dateOfBirthUTC"])
     return photourl + " " + profile
