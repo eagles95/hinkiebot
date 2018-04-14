@@ -64,7 +64,10 @@ def getPlayerStats(fName,lName):
     playerID = player["personId"]
     url = "http://data.nba.net/data/10s/prod/v1/" + str(constants.SEASON_YEAR) +  "/players/" + str(playerID) + "_profile.json"
     response = urllib.urlopen(url)
-    data =  json.loads(response.read())["league"]["standard"]["stats"]["latest"]
+    data1 = json.loads(response.read())
+    data =  data1["league"]["standard"]["stats"]["latest"]
+    if(data["seasonStageId"] == 4):
+	data = data1["league"]["standard"]["stats"]["regularSeason"]["season"][1]["total"]
     summary = getPlayerSummary(player)
     stats = scoreboard.getStats(data,constants.PLAYER_STATS,constants.PLAYER_STATS_ID)
     return summary + stats
