@@ -48,16 +48,19 @@ def getGameScore(teamID):
         game = getGame(teamID)
         ret = constants.id_to_team_name[int(game["vTeam"]["teamId"])] + " "  + game["vTeam"]["score"] + " @ " + constants.id_to_team_name[int(game["hTeam"]["teamId"])] + " "  + game["hTeam"]["score"]
         if(game["statusNum"] == constants.GAME_STATUS_FINAL):
-            return ret + str(', FINAL')
+            ret += str(', FINAL')
         elif (game["period"]["isHalftime"] == True):
-            return ret + str(', HALF')
+            ret += str(', HALF')
         else:
             ret =  ret + ", " + game["clock"] + " "
             period = game["period"]["current"]
             if (period <= 4):
-                return ret + str(period)+ "Q"
+                ret += str(period)+ "Q"
             else:
-                return ret + "OT"
+                ret += "OT"
+        if(game["seasonStageId"] == 4):
+            ret += " (" + game["playoffs"]["seriesSummaryText"]+")"
+        return ret
     except Exception,e:
         print(str(e))
 
