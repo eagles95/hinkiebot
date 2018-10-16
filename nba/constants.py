@@ -73,7 +73,7 @@ id_to_team_conf =  {
 
 
 #Season Year
-SEASON_YEAR = "2017"
+SEASON_YEAR = "2018"
 
 #GAME_STATUS_IDS
 GAME_STATUS_BEFORE  = 1
