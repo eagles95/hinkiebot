@@ -1,8 +1,74 @@
 import datetime
 import pytz
+import requests
+from apscheduler.scheduler import Scheduler
 
+#Season Year
+SEASON_YEAR = "2017"
+
+#player data
+player_url = "http://data.nba.net/data/10s/prod/v1/" + SEASON_YEAR  +"/players.json"
+player_data = requests.get(player_url).json()
+
+#ScheduleStuff
+sched = Scheduler()
+sched.start()
+
+def update():
+    global player_data
+    player_data = requests.get(player_url).json()
+
+sched.add_interval_job(update, hours=6)
+
+#Stats
+#(makes,attempts,statname)
+FG_STATS = ["fgm","fga","FG","tpm","tpa","3PT","ftm","fta","FT"]
+
+#(stat,statname)
+TEAM_STATS = ["assists","AST","totReb","REB","blocks","BLK","steals","STL","turnovers","TO"]
+PLAYER_LIVESTATS = ["assists","AST","totReb","REB","blocks","BLK","steals","STL","turnovers","TO","plusMinus","+/-","pFouls","fouls","min","mins"]
+PLAYER_STATS = ["ppg","ppg","apg","apg","rpg","rpg","bpg","bpg","spg","spg","fgp","FG%","tpp","3PT%","ftp","FT%"]
+
+#STATS IDS
+TEAM_STATS_ID = 0
+PLAYER_STATS_ID = 1
+PLAYER_LIVESTATS_ID = 2
+
+#GAME_STATUS_IDS
+GAME_STATUS_BEFORE  = 1
+GAME_STATUS_STARTED = 2
+GAME_STATUS_FINAL   = 3
+
+#SET TIME ZONE
+TIME_ZONE = pytz.timezone('US/Eastern')
+
+#Scoreboard update hour
+SCOREBOARD_UPDATE_HOUR = 11
+
+#&quote
+hinkie_quotes=["The goal is simple: A larger quiver. This quiver will give us more options immediately and more options over time.",
+                 "Why do we watch basketball games front to back? Why not watch games back to front, or out of order?",
+                 "This approach, like many that create value, isn't popular, particularly locally.",
+                 "It's about the willingness to say three simple words : I don't know.",
+                 "You have to be non-consensus and right.",
+                 "Fear has been the dominant motivator of the actions of too many for too long.",
+                 "Maintain the longest view in the room.",
+                 "Progress isn't linear.",
+                 "We talk a lot about the process, not the outcome.",
+                 "A new scientific truth does not triumph by convincing its opponents and making them see the light, but rather because its opponents eventually die.",
+                 "Violence at the rim.",
+                 "Grit matters.",
+                 "In this league, the long view picks at the lock of mediocrity.",
+                 "Team building is about one thing - the players.",
+                 "Value optionality",
+                 "You don't get to the moon by climbing a tree.",
+                 "A competitive league like the NBA necessitates a zig while our competitors comfortably zag.",
+                 "Sometimes the optimal place for your light is hiding directly under a bushel.",
+                 "It is critical to be cycle aware in a talent-driven league."]
+
+#BUNCH OF NAME SHIT
 #Mapping IDs to names
-id_to_team_name = { 
+id_to_team_name = {
     1610612737 : 'Hawks',
     1610612738 : 'Celtics',
     1610612751 : 'Nets',
@@ -32,7 +98,7 @@ id_to_team_name = {
     1610612759 :'Spurs',
     1610612761 : 'Raptors',
     1610612762 : 'Jazz',
-    1610612764 : 'Wizards' 
+    1610612764 : 'Wizards'
 }
 
 
@@ -67,10 +133,8 @@ id_to_team_conf =  {
     1610612759 :'west',
     1610612761 : 'east',
     1610612762 : 'west',
-    1610612764 : 'east' 
+    1610612764 : 'east'
 }
-    
-
 
 #Season Year
 SEASON_YEAR = "2018"
@@ -110,7 +174,7 @@ conf_names = {
 }
 
 #team name
-teams_names = { 
+teams_names = {
     'hawks': '1610612737',
     'atlanta': '1610612737',
     'atl': '1610612737',
@@ -244,23 +308,4 @@ teams_names = {
     'washington wizards': '1610612764'
 }
 
-hinkie_quotes=["The goal is simple: A larger quiver. This quiver will give us more options immediately and more options over time.",
-                 "Why do we watch basketball games front to back? Why not watch games back to front, or out of order?",
-                 "This approach, like many that create value, isn't popular, particularly locally.",
-                 "It's about the willingness to say three simple words : I don't know.",
-                 "You have to be non-consensus and right.",
-                 "Fear has been the dominant motivator of the actions of too many for too long.",
-                 "Maintain the longest view in the room.",
-                 "Progress isn't linear.",
-                 "We talk a lot about the process, not the outcome.",
-                 "A new scientific truth does not triumph by convincing its opponents and making them see the light, but rather because its opponents eventually die.",
-                 "Violence at the rim.",
-                 "Grit matters.",
-                 "In this league, the long view picks at the lock of mediocrity.",
-                 "Team building is about one thing - the players.",
-                 "Value optionality",
-                 "You don't get to the moon by climbing a tree.",
-                 "A competitive league like the NBA necessitates a zig while our competitors comfortably zag.",
-                 "Sometimes the optimal place for your light is hiding directly under a bushel.",
-                 "It is critical to be cycle aware in a talent-driven league."]
 

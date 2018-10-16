@@ -5,6 +5,7 @@ import urllib
 import pytz
 import constants
 import calendar
+import scoreboard
 
 """
 Returns game if team is playing rn
@@ -47,16 +48,19 @@ def getGameScore(teamID):
         game = getGame(teamID)
         ret = constants.id_to_team_name[int(game["vTeam"]["teamId"])] + " "  + game["vTeam"]["score"] + " @ " + constants.id_to_team_name[int(game["hTeam"]["teamId"])] + " "  + game["hTeam"]["score"]
         if(game["statusNum"] == constants.GAME_STATUS_FINAL):
-            return ret + str(', FINAL')
+            ret += str(', FINAL')
         elif (game["period"]["isHalftime"] == True):
-            return ret + str(', HALF')
+            ret += str(', HALF')
         else:
             ret =  ret + ", " + game["clock"] + " "
             period = game["period"]["current"]
             if (period <= 4):
-                return ret + str(period)+ "Q"
+                ret += str(period)+ "Q"
             else:
-                return ret + "OT"
+                ret += "OT"
+        if(game["seasonStageId"] == 4):
+            ret += " (" + game["playoffs"]["seriesSummaryText"]+")"
+        return ret
     except Exception,e:
         print(str(e))
 
@@ -70,6 +74,7 @@ def getBoxScore(teamID):
 
 
 def getTeamStats(teamID):
+    print("team stats command")
     boxscore = getBoxScore(teamID)
     stats = boxscore["stats"]
     hTeamId = boxscore["basicGameData"]["hTeam"]["teamId"]
@@ -81,14 +86,8 @@ def getTeamStats(teamID):
     else:
         ret += " @ " + constants.id_to_team_name[int(hTeamId)] + ", "
         stats = stats["vTeam"]["totals"]
-    ret += stats["fgm"] + "/" + stats["fga"] + "FGS; "
-    ret += stats["tpm"] + "/" + stats["tpa"] + " 3PT; "
-    ret += stats["ftm"] + "/" + stats["fta"] + " FT; "
-    ret += stats["assists"] + " AST; " + stats["defReb"] + " DEFREB; " + stats["offReb"] + " OFFREB; " + stats["totReb"] + " REB; " 
-    ret += stats["blocks"] + " BLK; "
-    ret += stats["steals"] + " STL; " + stats["turnovers"] + " TO"
-    return ret
-
+    print("pls")
+    return ret + scoreboard.getStats(stats,constants.TEAM_STATS,constants.TEAM_STATS_ID)
 
 """
 Parse game date and time data and convert to EST timezone
