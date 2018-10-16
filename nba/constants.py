@@ -4,7 +4,7 @@ import requests
 from apscheduler.scheduler import Scheduler
 
 #Season Year
-SEASON_YEAR = "2017"
+SEASON_YEAR = "2018"
 
 #player data
 player_url = "http://data.nba.net/data/10s/prod/v1/" + SEASON_YEAR  +"/players.json"
@@ -135,9 +135,6 @@ id_to_team_conf =  {
     1610612762 : 'west',
     1610612764 : 'east'
 }
-
-#Season Year
-SEASON_YEAR = "2018"
 
 #GAME_STATUS_IDS
 GAME_STATUS_BEFORE  = 1
