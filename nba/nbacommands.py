@@ -9,8 +9,9 @@ def getHinkieQuote():
     return constants.hinkie_quotes[randint(0,len(constants.hinkie_quotes)-1)]
 
 def getInfo():
-	return "list of commands here : https://hinkiebot.herokuapp.com/commands"
-
+    return "list of commands here : https://hinkiebot.herokuapp.com/commands"
+def update(name1,name2=None):
+    return "Update: &livestats is now &stats, use &seasonstats for season avgs"
 def runCommand(command,args):
         if(args == None):
             if(command in scoreboard_commands):
@@ -50,7 +51,7 @@ scoreboard_commands = {"scoreboard" : scoreboard.getScoreboard}
 
 player_commands = {"recent" : player.getPlayerLast3,
                    "stats" : player.getPlayerLiveStats,
-                   "livestats" : "Update: &livestats is now just &stats, use &seasonstats for player season avgs",
+                   "livestats" : update,
                    "profile" : player.getProfile,
                     "tdalert" : player.tripDubWatch,
                     "seasonstats":player.getPlayerStats
