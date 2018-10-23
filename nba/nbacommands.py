@@ -49,10 +49,11 @@ standings_commands = {"standings" : standings.getStandings}
 scoreboard_commands = {"scoreboard" : scoreboard.getScoreboard}
 
 player_commands = {"recent" : player.getPlayerLast3,
-                   "stats" : player.getPlayerStats,
-                   "livestats" : player.getPlayerLiveStats,
+                   "stats" : player.getPlayerLiveStats,
+                   "livestats" : "Update: &livestats is now just &stats, use &seasonstats for player season avgs",
                    "profile" : player.getProfile,
-                    "tdalert" : player.tripDubWatch
+                    "tdalert" : player.tripDubWatch,
+                    "seasonstats":player.getPlayerStats
 }
 
 misc_commands = {"quote": getHinkieQuote,"info" : getInfo,"commands" : getInfo}

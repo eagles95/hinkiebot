@@ -2,7 +2,7 @@ import requests
 from apscheduler.scheduler import Scheduler
 
 #Current Season
-CURRENT_SEASON = "20172018"
+CURRENT_SEASON = "20182019"
 
 
 player_info_url = "http://www.nhl.com/stats/rest/skaters?isAggregate=false&reportType=basic&isGame=false&reportName=skatersummary&sort=[{%22property%22:%22points%22,%22direction%22:%22DESC%22},{%22property%22:%22goals%22,%22direction%22:%22DESC%22},{%22property%22:%22assists%22,%22direction%22:%22DESC%22}]&cayenneExp=gameTypeId=2%20and%20seasonId%3E="+ CURRENT_SEASON +"%20and%20seasonId%3C=" + CURRENT_SEASON
