@@ -21,7 +21,7 @@ class HinkieBot(ch.RoomManager):
         try:
             msg = message.body.encode("utf-8").lstrip()
             print(msg)
-            if (msg[0] == nbaprefix || msg[0] == altnbaprefix):
+            if (msg[0] == nbaprefix or msg[0] == altnbaprefix):
                 msg = msg[1:]
                 try:
                     command,args = msg.split(" ",1)
@@ -47,5 +47,5 @@ class HinkieBot(ch.RoomManager):
             print(str(e))
 rooms = ["hinkiebottesterxd","acleenba","csnphilly","nbcsphilly","acmemed3"]
 bot_name = "HinkieBot"
-bot_pw = "fuckthecowboys"
+bot_pw = ""
 HinkieBot.easy_start(rooms,bot_name,bot_pw)
