@@ -50,6 +50,7 @@ scoreboard_commands = {"scoreboard" : scoreboard.getScoreboard}
 
 player_commands = {"recent" : player.getPlayerLast3,
                    "stats" : player.getPlayerStats,
+		   "s" : player.getPlayerStats,
                    "livestats" : player.getPlayerLiveStats,
                    "profile" : player.getProfile,
                     "tdalert" : player.tripDubWatch
