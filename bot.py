@@ -4,6 +4,7 @@ from nhl import nhlcommands
 
 nbaprefix = "&"
 nhlprefix = "#"
+altnbaprefix = "/"
 
 class HinkieBot(ch.RoomManager):
     def onConnect(self, room):
@@ -20,7 +21,7 @@ class HinkieBot(ch.RoomManager):
         try:
             msg = message.body.encode("utf-8").lstrip()
             print(msg)
-            if (msg[0] == nbaprefix):
+            if (msg[0] == nbaprefix || msg[0] == altnbaprefix):
                 msg = msg[1:]
                 try:
                     command,args = msg.split(" ",1)
