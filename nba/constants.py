@@ -27,7 +27,7 @@ FG_STATS = ["fgm","fga","FG","tpm","tpa","3PT","ftm","fta","FT"]
 #(stat,statname)
 TEAM_STATS = ["assists","AST","totReb","REB","blocks","BLK","steals","STL","turnovers","TO"]
 PLAYER_LIVESTATS = ["assists","AST","totReb","REB","blocks","BLK","steals","STL","turnovers","TO","plusMinus","+/-","pFouls","fouls","min","mins"]
-PLAYER_STATS = ["ppg","ppg","apg","apg","rpg","rpg","bpg","bpg","spg","spg","fgp","FG%","tpp","3PT%","ftp","FT%"]
+PLAYER_STATS = ["gamesPlayed","gp","ppg","ppg","apg","apg","rpg","rpg","bpg","bpg","spg","spg","mpg","mpg","topg","topg","fgp","FG%","tpp","3PT%","ftp","FT%"]
 
 #STATS IDS
 TEAM_STATS_ID = 0
