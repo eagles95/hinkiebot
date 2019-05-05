@@ -1,6 +1,6 @@
 from lib import ch
 from nba import nbacommands
-from nhl import nhlcommands
+#from nhl import nhlcommands
 
 nbaprefix = "&"
 nhlprefix = "#"
@@ -32,17 +32,17 @@ class HinkieBot(ch.RoomManager):
                     ret = nbacommands.runCommand(msg.lower(),None)
                 if(ret!=None):
                     room.message(str(ret))
-            elif(msg[0] == nhlprefix):
-                msg = msg[1:]
-                try:
-                    command,args = msg.split(" ",1)
-                    print("command: " + command)
-                    print("args: " + args)
-                    ret = nhlcommands.runCommand(command.lower(),args.lower())
-                except:
-                    ret = nhlcommands.runCommand(msg.lower(),None)
-                if(ret!=None):
-                    room.message(str(ret))
+            #elif(msg[0] == nhlprefix):
+                #msg = msg[1:]
+                #try:
+                    #command,args = msg.split(" ",1)
+                    #print("command: " + command)
+                    #print("args: " + args)
+                    #ret = nhlcommands.runCommand(command.lower(),args.lower())
+                #except:
+                    #ret = nhlcommands.runCommand(msg.lower(),None)
+                #if(ret!=None):
+                    #room.message(str(ret))
         except Exception as e:
             print(str(e))
 rooms = ["hinkiebottesterxd","acleenba","csnphilly","nbcsphilly","acmemed3"]
