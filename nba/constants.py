@@ -4,7 +4,7 @@ import requests
 from apscheduler.scheduler import Scheduler
 
 #Season Year
-SEASON_YEAR = "2018"
+SEASON_YEAR = "2019"
 
 #player data
 player_url = "http://data.nba.net/data/10s/prod/v1/" + SEASON_YEAR  +"/players.json"
